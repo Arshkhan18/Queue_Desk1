@@ -2,7 +2,7 @@ package com.arshkhan.queuedesk.model;
 
 import java.time.LocalDateTime;
 import java.time.Duration;
-public class Ticket{
+public abstract class Ticket{
     private Integer id;
     private String title;
     private String description;
@@ -35,7 +35,9 @@ public class Ticket{
 
     }
 
-    //getters
+    //Abstract Methods
+    public abstract double estimateEffortHours();
+
     // Getters
     public int getId() {
         return id;
@@ -93,4 +95,12 @@ public class Ticket{
         return nextId - 1;
     }
 
+    @Override
+    public String toString() {
+        return "Ticket ID: " + id +
+                ", Title: " + title +
+                ", Requester: " + requester +
+                ", Priority: " + priority +
+                ", Status: " + status;
+    }
 }
