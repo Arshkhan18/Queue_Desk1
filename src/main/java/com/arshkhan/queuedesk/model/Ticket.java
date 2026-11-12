@@ -2,7 +2,11 @@ package com.arshkhan.queuedesk.model;
 
 import java.time.LocalDateTime;
 import java.time.Duration;
-public abstract class Ticket{
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Collections;
+
+public abstract class Ticket implements Comparable<Ticket> {
     private Integer id;
     private String title;
     private String description;
@@ -10,6 +14,12 @@ public abstract class Ticket{
     private Priority priority;
     private Status status;
     private LocalDateTime createdAt;
+
+    //phase 4 part
+    //Adding assignee
+    private String assignee;
+    private Set<String> tags = new HashSet<>();
+
 
     private static Integer nextId = 1;
 
@@ -67,6 +77,13 @@ public abstract class Ticket{
         return createdAt;
     }
 
+    //assignee
+    public String getAssignee() {return assignee;}
+
+    public Set<String> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
+
     // Setters
     public void setDescription(String description) {
         this.description = description;
@@ -79,6 +96,12 @@ public abstract class Ticket{
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    //assignee
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+    }
+    public void addTags(String tag){ tags.add(tag);}
 
     // Calculate ticket age
     public double ageInHours() {
@@ -95,12 +118,30 @@ public abstract class Ticket{
         return nextId - 1;
     }
 
+    //Implementing Comparable Interface
+    @Override
+    public int compareTo(Ticket other) {
+
+        // Higher priority should come first
+        int priorityComparison =
+                other.getPriority().compareTo(this.getPriority());
+
+        if (priorityComparison != 0) {
+            return priorityComparison;
+        }
+
+        // Older ticket should come first
+        return this.createdAt.compareTo(other.createdAt);
+    }
+
     @Override
     public String toString() {
         return "Ticket ID: " + id +
                 ", Title: " + title +
                 ", Requester: " + requester +
                 ", Priority: " + priority +
-                ", Status: " + status;
+                ", Status: " + status +
+                ", Assignee: " + assignee +
+                ", Tags: " + tags;
     }
 }
