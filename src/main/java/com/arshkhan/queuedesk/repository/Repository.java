@@ -32,6 +32,18 @@ public class Repository<T extends Ticket>{
         );
     }
 
+
+    //Find Ticket By ID using streams
+    //Throwing Optional Instead of Exception
+    
+    public Optional<T>findByIdSafe(int id){
+        return tickets.stream()
+                .filter(ticket -> ticket.getId()==id)
+                .findFirst();
+    }
+
+
+
     //Group Ticket by Assignee and return
     public Map<String, List<T>> groupByAssignee() {
         Map<String, List<T>> groupedTickets = new HashMap<>();
