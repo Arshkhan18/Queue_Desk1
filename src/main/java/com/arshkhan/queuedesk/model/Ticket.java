@@ -86,22 +86,39 @@ public abstract class Ticket implements Comparable<Ticket> {
 
     // Setters
     public void setDescription(String description) {
-        this.description = description;
+        if (description == null || description.isBlank()) {
+            throw new IllegalArgumentException("Description cannot be empty");
+        }
+
+        this.description = description.trim();
     }
 
+
     public void setPriority(Priority priority) {
+        if (priority == null) {
+            throw new IllegalArgumentException("Priority cannot be null");
+        }
+
         this.priority = priority;
     }
 
     public void setStatus(Status status) {
+        if (status == null) {
+            throw new IllegalArgumentException("Status cannot be null");
+        }
+
         this.status = status;
     }
 
     //assignee
     public void setAssignee(String assignee) {
-        this.assignee = assignee;
+        if (assignee == null || assignee.isBlank()) {
+            this.assignee = null;
+        } else {
+            this.assignee = assignee.trim();
+        }
     }
-    public void addTags(String tag){ tags.add(tag);}
+    public void addTag(String tag){ tags.add(tag);}
 
     // Calculate ticket age
     public double ageInHours() {
@@ -132,6 +149,22 @@ public abstract class Ticket implements Comparable<Ticket> {
 
         // Older ticket should come first
         return this.createdAt.compareTo(other.createdAt);
+    }
+
+    //Shorter Description
+    public String getShortDescription(int maxLength) {
+
+        if (maxLength <= 0) {
+            throw new IllegalArgumentException(
+                    "Maximum length must be positive"
+            );
+        }
+
+        if (description.length() <= maxLength) {
+            return description;
+        }
+
+        return description.substring(0, maxLength - 3) + "...";
     }
 
     @Override

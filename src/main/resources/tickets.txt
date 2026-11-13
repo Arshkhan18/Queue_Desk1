@@ -1,0 +1,4 @@
+BUG|Login Error|Unable to login|Arsh|HIGH|OPEN|Rahul|backend,login|CRITICAL|Login crashes after submitting credentials
+FEATURE|Dark Mode|Add dark mode|Rahul|LOW|OPEN|Arsh|ui,frontend|10|Improve user experience
+ACCESS|Admin Access|Need admin access|Aman|CRITICAL|IN_PROGRESS|Rahul|database,security|Database|ADMIN
+BUG|Payment Failure|Payment is not processing|Arsh|MEDIUM|OPEN||backend,payment|HIGH|Payment API returns an error

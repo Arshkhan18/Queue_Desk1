@@ -1,10 +1,10 @@
 package com.arshkhan.queuedesk.repository;
 
 import com.arshkhan.queuedesk.model.Ticket;
-
+import com.arshkhan.queuedesk.exception.TicketNotFoundException;
 import java.util.*;
 
-public class Repository<T extends Ticket> {
+public class Repository<T extends Ticket>{
 
     private List<T> tickets = new ArrayList<>();
 
@@ -25,7 +25,11 @@ public class Repository<T extends Ticket> {
                 return t;
             }
         }
-        return null;
+//        return null;
+        //throw ticketNotfound Exception
+        throw new TicketNotFoundException(
+                "Ticket with ID " + id + " not found."
+        );
     }
 
     //Group Ticket by Assignee and return

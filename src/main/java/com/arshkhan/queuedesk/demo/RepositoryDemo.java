@@ -1,5 +1,6 @@
 package com.arshkhan.queuedesk.demo;
 
+import com.arshkhan.queuedesk.exception.TicketNotFoundException;
 import com.arshkhan.queuedesk.model.*;
 import com.arshkhan.queuedesk.repository.Repository;
 
@@ -89,11 +90,11 @@ public class RepositoryDemo {
 
         System.out.println("\n========== FIND TICKET BY ID ==========");
 
-        int searchId = t3.getId();
+        try{
+            int searchId = t3.getId();
 
-        Ticket foundTicket = repository.findById(searchId);
+            Ticket foundTicket = repository.findById(searchId);
 
-        if (foundTicket != null) {
 
             System.out.println(
                     "Found Ticket: " +
@@ -101,8 +102,8 @@ public class RepositoryDemo {
                             " | Priority: " +
                             foundTicket.getPriority()
             );
-
-        } else {
+        }
+         catch(TicketNotFoundException e){
             System.out.println("Ticket not found!");
         }
 

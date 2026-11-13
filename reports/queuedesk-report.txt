@@ -1,0 +1,72 @@
+========================================
+          QUEUEDESK REPORT
+========================================
+
+Total Tickets: 4
+
+========== TICKET DETAILS ==========
+
+Ticket ID: 1
+Title: Login Error
+Priority: HIGH
+Status: OPEN
+Assignee: Rahul
+Tags: [backend, login]
+Age: 0.03 hours
+Estimated Effort: 8.0 hours
+----------------------------------------
+Ticket ID: 2
+Title: Dark Mode
+Priority: LOW
+Status: OPEN
+Assignee: Arsh
+Tags: [ui, frontend]
+Age: 0.03 hours
+Estimated Effort: 6.0 hours
+----------------------------------------
+Ticket ID: 3
+Title: Admin Access
+Priority: CRITICAL
+Status: IN_PROGRESS
+Assignee: Rahul
+Tags: [database, security]
+Age: 0.03 hours
+Estimated Effort: 4.0 hours
+----------------------------------------
+Ticket ID: 4
+Title: Payment Failure
+Priority: MEDIUM
+Status: OPEN
+Assignee: Unassigned
+Tags: [backend, payment]
+Age: 0.03 hours
+Estimated Effort: 4.0 hours
+----------------------------------------
+
+========== PRIORITY SUMMARY ==========
+LOW: 1
+MEDIUM: 1
+HIGH: 1
+CRITICAL: 1
+
+========== STATUS SUMMARY ==========
+OPEN: 3
+IN_PROGRESS: 1
+RESOLVED: 0
+CLOSED: 0
+
+========== EFFORT SUMMARY ==========
+Total Estimated Effort: 22.0 hours
+
+========== OLDEST OPEN TICKET ==========
+Ticket ID: 1
+Title: Login Error
+Age: 0.03 hours
+
+========== OVERDUE CRITICAL TICKETS ==========
+No overdue CRITICAL tickets found.
+Total overdue CRITICAL tickets: 0
+
+========================================
+          END OF REPORT
+========================================
