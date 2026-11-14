@@ -1,5 +1,7 @@
 package com.arshkhan.queuedesk.model;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class FeatureRequestTicket extends Ticket {
 
     private int votes;
@@ -16,6 +18,11 @@ public class FeatureRequestTicket extends Ticket {
 
         this.votes = votes;
         this.businessJustification = businessJustification;
+    }
+
+
+    public FeatureRequestTicket() {
+        super();
     }
 
     public int getVotes() {

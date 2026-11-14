@@ -6,6 +6,24 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Collections;
 
+//Creating For json conversion of Java Object
+//Identifying the Type of Ticket Raised
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = BugTicket.class, name = "bug"),
+        @JsonSubTypes.Type(value = FeatureRequestTicket.class, name = "feature"),
+        @JsonSubTypes.Type(value = AccessRequestTicket.class, name = "access")
+})
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public abstract class Ticket implements Comparable<Ticket> {
     private Integer id;
     private String title;
@@ -43,6 +61,9 @@ public abstract class Ticket implements Comparable<Ticket> {
         this(title, "No description provided",
                 requester, Priority.MEDIUM);
 
+    }
+    //No argument constructor for jackson conversion
+    protected Ticket() {
     }
 
     //Abstract Methods
@@ -135,6 +156,13 @@ public abstract class Ticket implements Comparable<Ticket> {
         return nextId - 1;
     }
 
+    //Return the highest Ticket created to resolve during the assigning ticket id for the json
+    public static void updateNextId(int highestExistingId) {
+        if (nextId <= highestExistingId) {
+            nextId = highestExistingId + 1;
+        }
+    }
+
     //Implementing Comparable Interface
     @Override
     public int compareTo(Ticket other) {
@@ -153,7 +181,6 @@ public abstract class Ticket implements Comparable<Ticket> {
 
     //Shorter Description
     public String getShortDescription(int maxLength) {
-
         if (maxLength <= 0) {
             throw new IllegalArgumentException(
                     "Maximum length must be positive"
@@ -164,9 +191,12 @@ public abstract class Ticket implements Comparable<Ticket> {
             return description;
         }
 
+        if (maxLength <= 3) {
+            return description.substring(0, maxLength);
+        }
+
         return description.substring(0, maxLength - 3) + "...";
     }
-
     @Override
     public String toString() {
         return "Ticket ID: " + id +

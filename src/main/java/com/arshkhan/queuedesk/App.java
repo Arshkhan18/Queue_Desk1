@@ -1,11 +1,15 @@
 package com.arshkhan.queuedesk;
 
+import com.arshkhan.queuedesk.io.TicketJsonStore;
+import java.nio.file.Files;
+
 import com.arshkhan.queuedesk.model.*;
 import com.arshkhan.queuedesk.repository.Repository;
 import com.arshkhan.queuedesk.io.TicketFileLoader;
 import com.arshkhan.queuedesk.report.ReportGenerator;
 import com.arshkhan.queuedesk.exception.InvalidTicketDataException;
 import com.arshkhan.queuedesk.exception.TicketNotFoundException;
+
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -98,9 +102,40 @@ public class App {
 
         try {
 
-            Path file = Path.of("src/main/resources/tickets.txt");
+            Path jsonFile = Path.of("tickets.json");
+            Path textFile = Path.of("src/main/resources/tickets.txt");
 
-            List<Ticket> loadedTickets = TicketFileLoader.load(file);
+            List<Ticket> loadedTickets;
+
+            // Case 1: JSON file exists and contains data
+            if (Files.exists(jsonFile) && Files.size(jsonFile) > 0) {
+
+                loadedTickets = TicketJsonStore.load(jsonFile);
+
+                System.out.println("Tickets loaded from JSON successfully.");
+
+            }
+
+            // Case 2: JSON is missing or empty, but text file exists
+            else if (Files.exists(textFile)) {
+
+                loadedTickets = TicketFileLoader.load(textFile);
+
+                // Migrate text data into JSON
+                TicketJsonStore.save(loadedTickets, jsonFile);
+
+                System.out.println("Old tickets migrated to JSON successfully.");
+
+            }
+
+            // Case 3: Neither file exists
+            else {
+
+                loadedTickets = new ArrayList<>();
+
+                System.out.println("No existing ticket files found.");
+
+            }
 
             for (Ticket ticket : loadedTickets) {
                 repository.add(ticket);
@@ -113,6 +148,7 @@ public class App {
         } catch (IOException | InvalidTicketDataException e) {
 
             System.out.println("Error loading tickets: " + e.getMessage());
+
         }
     }
 

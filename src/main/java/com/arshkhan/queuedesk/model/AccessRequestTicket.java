@@ -1,7 +1,10 @@
 package com.arshkhan.queuedesk.model;
 
 import com.arshkhan.queuedesk.interfaces.Escalatable;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class AccessRequestTicket extends Ticket implements Escalatable {
 
     private String systemName;
@@ -20,6 +23,10 @@ public class AccessRequestTicket extends Ticket implements Escalatable {
 
         this.systemName = systemName;
         this.accessLevel = accessLevel;
+    }
+    //No Argument Constructor
+    public AccessRequestTicket() {
+        super();
     }
 
     public String getSystemName() {
@@ -50,6 +57,7 @@ public class AccessRequestTicket extends Ticket implements Escalatable {
     }
 
     @Override
+    @JsonIgnore
     public boolean isEscalated() {
         return escalationLevel > 0;
     }

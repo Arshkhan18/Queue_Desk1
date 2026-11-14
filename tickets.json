@@ -1,0 +1,42 @@
+[ {
+  "type" : "bug",
+  "id" : 1,
+  "title" : "Login Error",
+  "description" : "Unable to login",
+  "requester" : "Arsh",
+  "priority" : "HIGH",
+  "status" : "OPEN",
+  "createdAt" : "2026-11-14T18:39:34.5909039",
+  "assignee" : "John",
+  "tags" : [ "backend", "authentication" ],
+  "severity" : "CRITICAL",
+  "stepsToReproduce" : "Login crashes after submitting credentials",
+  "escalationLevel" : 0
+}, {
+  "type" : "feature",
+  "id" : 2,
+  "title" : "Dark Mode",
+  "description" : "Add dark mode",
+  "requester" : "Rahul",
+  "priority" : "LOW",
+  "status" : "OPEN",
+  "createdAt" : "2026-11-14T18:39:34.5920011",
+  "assignee" : "Sarah",
+  "tags" : [ "UI", "frontend" ],
+  "votes" : 10,
+  "businessJustification" : "Improve user experience"
+}, {
+  "type" : "access",
+  "id" : 3,
+  "title" : "Admin Access",
+  "description" : "Need admin access",
+  "requester" : "Aman",
+  "priority" : "CRITICAL",
+  "status" : "OPEN",
+  "createdAt" : "2026-11-14T18:39:34.5929999",
+  "assignee" : "Michael",
+  "tags" : [ "security", "database" ],
+  "systemName" : "Database",
+  "accessLevel" : "ADMIN",
+  "escalationLevel" : 0
+} ]
